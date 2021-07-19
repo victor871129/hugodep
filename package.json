@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "bin": {
-    "hugodep": "node index.js"
+    "hugodep": "npm run start"
   },
   "scripts": {
-    "start": "node index.js --run build --run test -i node_modules -i build",
+    "start": "node index.js",
+    "start:example": "node index.js --run build --run test -i node_modules -i build",
     "test": "echo \"Error: no test specified\""
   },
   "keywords": [],
