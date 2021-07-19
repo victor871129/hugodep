@@ -3,6 +3,9 @@
   "version": "0.7.1",
   "description": "",
   "main": "index.js",
+  "bin": {
+    "hugodep": "index.js"
+  },
   "scripts": {
     "start": "node index.js --run build --run test -i node_modules -i build",
     "test": "echo \"Error: no test specified\""
