@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "bin": {
-    "hugodep": "index.js"
+    "hugodep": "node index.js"
   },
   "scripts": {
     "start": "node index.js --run build --run test -i node_modules -i build",
