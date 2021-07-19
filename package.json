@@ -2,9 +2,8 @@
   "name": "hugodep",
   "version": "0.7.4",
   "description": "",
-  "main": "index.js",
   "bin": {
-    "hugodep": "node index.js"
+    "hugodep": "node ./index.js"
   },
   "scripts": {
     "start": "node index.js",
