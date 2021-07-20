@@ -76,10 +76,6 @@ const runScript = (useReject, tempDirectory, currentLibraryVersion, callbackMeth
   exec('npm install --prefer-offline --no-audit', { cwd: tempDirectory }, (err) => { // TODO use npm ci
     if (err) return logClean(useReject, err, tempDirectory);
 
-    // the *entire* stdout and stderr (buffered)
-    // console.log(`stdout: ${stdout}`);
-    // console.log(`stderr: ${stderr}`);
-
     let hasError = false;
     argumentRun.forEach((actualScript, scriptIndex) => {
       console.log(`${Math.round((progressBar++) * 100 / progressTotal)}%`, argumentVerb ? `npm run ${actualScript}` : '');
