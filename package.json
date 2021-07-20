@@ -6,6 +6,10 @@
   "bin": {
     "hugodep": "index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/victor871129/hugodep"
+  },
   "scripts": {
     "start": "node index.js --run build --run test",
     "test": "echo \"Error: no test specified\""
