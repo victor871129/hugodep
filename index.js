@@ -29,13 +29,15 @@ let progressBar = 1;
 let progressTotal = 0;
 const concurrentLimit = promiseLimit(isLowEndMachine ? 1 : 4);
 
-// TODO test without npm
-// breaking tests
-// TODO test without node
-// readFileSync catch, writeFileSync catch
-// test posix multiplatform
-// npm ci: check package.json or npm-shrinkwrap.json
-// check delete directory on finish
+// TODO
+// - readFileSync catch, writeFileSync catch
+// - test without npm
+// - breaking tests
+// - test without node
+// - test posix multiplatform
+// - test check delete directory on finish
+// - npm ci: check package.json or npm-shrinkwrap.json
+// - np --no-2fa
 
 const filterFiles = (sourceFile) => {
   let ignoredRootFolders = ['node_modules', 'build'];
