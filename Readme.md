@@ -2,6 +2,9 @@
 
 hugodep is for analyzing the dependencies in a project to see: how each dependency is used, and which dependencies are useless. The same goals as depcheck, but this library works 100% guaranteed without false alarms, with a 2% of their lines of code.
 
+## Any syntax, any language
+Without need of plugins, this tool supports every language and syntax you can put into the package.json file in the **scripts** section.
+
 ## Usage
 
 Its preferred to be run overnight. If you want faster results use an SSD and deactivate any file monitor.
