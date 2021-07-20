@@ -171,7 +171,8 @@ const main = () => {
     .then(async (hasError) => {
       if (hasError) return console.error('Your project must isolatedly run the package.json scripts.');
 
-      console.log(`${Math.round((progressBar++) * 100 / progressTotal)}% Version: ${process.env.npm_package_version}`);
+      // TODO version not working: Version: ${process.env.npm_package_version}
+      console.log(`${Math.round((progressBar++) * 100 / progressTotal)}%`);
       // TODO message: Ignored these root folders: node_modules, build. Dependencies not analyzed with these package.json scripts: start, eject
 
       const usePromises = allDependencies.map((actualDependency) => concurrentLimit(isolatedRun, actualDependency));
