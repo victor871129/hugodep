@@ -3,7 +3,7 @@
   "version": "0.7.5",
   "description": "",
   "bin": {
-    "hugodep": "node ./index.js"
+    "hugodep": "node index.js"
   },
   "scripts": {
     "start": "node index.js",
