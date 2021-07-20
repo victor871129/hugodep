@@ -31,13 +31,13 @@ let progressTotal = 0;
 const concurrentLimit = promiseLimit(isLowEndMachine ? 1 : 4);
 
 // TODO
-// - readFileSync catch, writeFileSync catch
 // - test without npm
 // - breaking tests
 // - test without node
 // - test posix multiplatform
 // - test check delete directory on finish
 // - does it work with git submodules?
+// - readFileSync catch, writeFileSync catch
 // - npm ci: check package.json or npm-shrinkwrap.json
 // - np --no-2fa
 
