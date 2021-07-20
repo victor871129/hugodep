@@ -16,11 +16,15 @@ const argumentVars = require('yargs') // https://github.com/yargs/yargs/issues/3
     alias: 'i',
     type: 'string',
   })
+  .option('verbose', {
+    type: 'boolean',
+  })
   .argv;
 
 const isLowEndMachine = false; // TODO TEST
 const argumentRun = Array.isArray(argumentVars.run) ? argumentVars.run : (argumentVars.run != null ? [argumentVars.run] : null);
 const argumentFolder = Array.isArray(argumentVars.ignorefolder) ? argumentVars.ignorefolder : (argumentVars.ignorefolder != null ? [argumentVars.ignorefolder] : null);
+const argumentVerb = argumentVars.verbose != null;
 let progressBar = 1;
 let progressTotal = 0;
 const concurrentLimit = promiseLimit(isLowEndMachine ? 1 : 4);
@@ -28,7 +32,6 @@ const concurrentLimit = promiseLimit(isLowEndMachine ? 1 : 4);
 // TODO test without npm
 // breaking tests
 // TODO test without node
-// --verbose option
 // readFileSync catch, writeFileSync catch
 // test posix multiplatform
 // npm ci: check package.json or npm-shrinkwrap.json
@@ -53,7 +56,7 @@ const allClean = (useReject, tempDirectory) => {
   fileSystem.remove(tempDirectory, (err) => {
     if (err) return useReject(err);
 
-    return console.log(`${Math.round((progressBar++) * 100 / progressTotal)}%`, 'cleaned!');
+    return console.log(`${Math.round((progressBar++) * 100 / progressTotal)}%`, argumentVerb ? 'cleaned!' : '');
   });
 };
 
@@ -79,7 +82,7 @@ const runScript = (useReject, tempDirectory, currentLibraryVersion, callbackMeth
 
     let hasError = false;
     argumentRun.forEach((actualScript, scriptIndex) => {
-      console.log(`${Math.round((progressBar++) * 100 / progressTotal)}%`, actualScript);
+      console.log(`${Math.round((progressBar++) * 100 / progressTotal)}%`, argumentVerb ? `npm run ${actualScript}` : '');
       if (hasError) return;
 
       try {
@@ -168,7 +171,7 @@ const main = () => {
     .then(async (hasError) => {
       if (hasError) return console.error('Your project must isolatedly run the package.json scripts.');
 
-      console.log(`${Math.round((progressBar++) * 100 / progressTotal)}%`);
+      console.log(`${Math.round((progressBar++) * 100 / progressTotal)}% Version: ${process.env.npm_package_version}`);
       // TODO message: Ignored these root folders: node_modules, build. Dependencies not analyzed with these package.json scripts: start, eject
 
       const usePromises = allDependencies.map((actualDependency) => concurrentLimit(isolatedRun, actualDependency));
