@@ -2,12 +2,12 @@
   "name": "hugodep",
   "version": "0.7.6",
   "description": "",
+  "main": "index.js",
   "bin": {
-    "hugodep": "node index.js"
+    "hugodep": "index.js"
   },
   "scripts": {
-    "start": "node index.js",
-    "start:example": "node index.js --run build --run test -i node_modules -i build",
+    "start": "node index.js --run build --run test",
     "test": "echo \"Error: no test specified\""
   },
   "keywords": [],

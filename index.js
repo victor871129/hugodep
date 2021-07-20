@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /* eslint-disable no-mixed-operators */
 /* eslint-disable no-plusplus */
 const { exec, execSync } = require('child_process');
