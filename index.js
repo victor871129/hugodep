@@ -21,6 +21,7 @@ const argumentVars = require('yargs') // https://github.com/yargs/yargs/issues/3
   })
   .argv;
 
+const failedTestCopy = false; // TODO TEST true
 const isLowEndMachine = false; // TODO TEST
 const argumentRun = Array.isArray(argumentVars.run) ? argumentVars.run : (argumentVars.run != null ? [argumentVars.run] : null);
 const argumentFolder = Array.isArray(argumentVars.ignorefolder) ? argumentVars.ignorefolder : (argumentVars.ignorefolder != null ? [argumentVars.ignorefolder] : null);
@@ -36,6 +37,7 @@ const concurrentLimit = promiseLimit(isLowEndMachine ? 1 : 4);
 // - test without node
 // - test posix multiplatform
 // - test check delete directory on finish
+// - does it work with git submodules?
 // - npm ci: check package.json or npm-shrinkwrap.json
 // - np --no-2fa
 
@@ -99,8 +101,7 @@ const runScript = (useReject, tempDirectory, currentLibraryVersion, callbackMeth
 };
 
 const copyFiles = (useReject, tempDirectory, modifyFileMethod, callbackMethod) => {
-  const testPath = ''; // TODO TEST (dependencyIndex === 0 ? 'dummy' : '')
-  fileSystem.copy(process.cwd() + testPath, tempDirectory, { filter: filterFiles }, (err) => {
+  fileSystem.copy(process.cwd() + (failedTestCopy ? 'dummy' : ''), tempDirectory, { filter: filterFiles }, (err) => {
     if (err) return logClean(useReject, err, tempDirectory);
 
     console.log(`${Math.round((progressBar++) * 100 / progressTotal)}%`);
