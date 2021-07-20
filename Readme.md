@@ -7,7 +7,7 @@ Without need of plugins, this tool supports every language and syntax you can pu
 
 ## Usage
 
-Its preferred to be run overnight. If you want faster results use an SSD and deactivate any file monitor.
+If you want faster results use an SSD and deactivate any file monitor. Its preferred to be run overnight. 
 
 Take into account what package.json scripts you pass to run, because if you forget to pass any critical script you are going to get inaccurate results.
 
