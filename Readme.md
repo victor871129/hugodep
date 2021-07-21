@@ -3,7 +3,7 @@
 hugodep is for analyzing the dependencies in a project to see: how each dependency is used, and which dependencies are useless. The same goals as depcheck, but this library works 100% guaranteed without false alarms, with a 2% of their lines of code.
 
 ## Any syntax, any language
-Without need of plugins, this tool supports every language and every syntax you can put into the **scripts** section of the package.json file.
+Without need of plugins, this tool supports every language and every syntax you can define in the **scripts** section of the package.json file.
 
 ## Usage
 
@@ -11,10 +11,10 @@ If you want faster results use an SSD and deactivate any file monitor. Its prefe
 
 Take into account what package.json scripts you pass to run, because if you forget to pass any critical script you are going to get inaccurate results.
 
-This example uses [npx](https://nodejs.dev/learn/the-npx-nodejs-package-runner) and analyzes the dependencies running only the script **build** and only the script **test**:
+This example uses [npx](https://nodejs.dev/learn/the-npx-nodejs-package-runner) and analyzes the dependencies running only the script **build** and only the script **test** and utilizing npm CLI:
 
 ```
-npx hugodep --run build --run test
+npx hugodep --run build --run test --use-npm
 ```
 ## Package.json scripts
 

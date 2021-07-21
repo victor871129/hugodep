@@ -19,6 +19,10 @@ const argumentVars = require('yargs') // https://github.com/yargs/yargs/issues/3
   .option('verbose', {
     type: 'boolean',
   })
+  .option('use-npm', {
+    alias: 'n',
+    type: 'boolean',
+  })
   .argv;
 
 const failedTestCopy = false; // TODO TEST true
@@ -26,6 +30,7 @@ const isLowEndMachine = false; // TODO TEST
 const argumentRun = Array.isArray(argumentVars.run) ? argumentVars.run : (argumentVars.run != null ? [argumentVars.run] : null);
 const argumentFolder = Array.isArray(argumentVars.ignorefolder) ? argumentVars.ignorefolder : (argumentVars.ignorefolder != null ? [argumentVars.ignorefolder] : null);
 const argumentVerb = argumentVars.verbose != null;
+const argumentAlt = argumentVars.alternative != null;
 let progressBar = 1;
 let progressTotal = 0;
 const concurrentLimit = promiseLimit(isLowEndMachine ? 1 : 4);
@@ -77,7 +82,7 @@ const finalClean = (useReject, tempDirectory, actualIndex, maxLength) => {
 };
 
 const runScript = (useReject, tempDirectory, currentLibraryVersion, callbackMethod) => {
-  exec('npm install --prefer-offline --no-audit', { cwd: tempDirectory }, (err) => { // TODO use npm ci
+  exec(argumentAlt ? 'npm install --prefer-offline --no-audit' : 'yarn install', { cwd: tempDirectory }, (err) => {
     if (err) return logClean(useReject, err, tempDirectory);
 
     let hasError = false;
@@ -86,7 +91,7 @@ const runScript = (useReject, tempDirectory, currentLibraryVersion, callbackMeth
       if (hasError) return;
 
       try {
-        execSync(`npm run ${actualScript}`, { cwd: tempDirectory, stdio: 'ignore' });
+        execSync(argumentAlt ? `npm run ${actualScript}` : `yarn run ${actualScript}`, { cwd: tempDirectory, stdio: 'ignore' });
         // console.log(JSON.stringify(stdout))
         finalClean(useReject, tempDirectory, scriptIndex, argumentRun.length);
       } catch (error) {
