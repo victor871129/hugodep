@@ -11,10 +11,12 @@ If you want faster results use an SSD and deactivate any file monitor. Its prefe
 
 Take into account what package.json scripts you pass to run, because if you forget to pass any critical script you are going to get inaccurate results.
 
-This example uses [npx](https://nodejs.dev/learn/the-npx-nodejs-package-runner) and analyzes the dependencies running only the script **build** and only the script **test** and utilizing npm CLI:
+Set `--use-npm` argument for utilizing *npm* instead of the faster *yarn*.
+
+This example uses [npx](https://nodejs.dev/learn/the-npx-nodejs-package-runner) and analyzes the dependencies running only the script **build** and only the script **test**:
 
 ```
-npx hugodep --run build --run test --use-npm
+npx hugodep --run build --run test
 ```
 ## Package.json scripts
 

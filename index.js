@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+/* eslint-disable no-console */
 /* eslint-disable no-mixed-operators */
 /* eslint-disable no-plusplus */
 const { exec, execSync } = require('child_process');
@@ -30,7 +31,7 @@ const isLowEndMachine = false; // TODO TEST
 const argumentRun = Array.isArray(argumentVars.run) ? argumentVars.run : (argumentVars.run != null ? [argumentVars.run] : null);
 const argumentFolder = Array.isArray(argumentVars.ignorefolder) ? argumentVars.ignorefolder : (argumentVars.ignorefolder != null ? [argumentVars.ignorefolder] : null);
 const argumentVerb = argumentVars.verbose != null;
-const argumentAlt = argumentVars.alternative != null;
+const argumentNpm = argumentVars['use-npm'] != null;
 let progressBar = 1;
 let progressTotal = 0;
 const concurrentLimit = promiseLimit(isLowEndMachine ? 1 : 4);
@@ -82,7 +83,7 @@ const finalClean = (useReject, tempDirectory, actualIndex, maxLength) => {
 };
 
 const runScript = (useReject, tempDirectory, currentLibraryVersion, callbackMethod) => {
-  exec(argumentAlt ? 'npm install --prefer-offline --no-audit' : 'yarn install', { cwd: tempDirectory }, (err) => {
+  exec(argumentNpm ? 'npm install --prefer-offline --no-audit' : 'yarn install', { cwd: tempDirectory }, (err) => {
     if (err) return logClean(useReject, err, tempDirectory);
 
     let hasError = false;
@@ -91,7 +92,7 @@ const runScript = (useReject, tempDirectory, currentLibraryVersion, callbackMeth
       if (hasError) return;
 
       try {
-        execSync(argumentAlt ? `npm run ${actualScript}` : `yarn run ${actualScript}`, { cwd: tempDirectory, stdio: 'ignore' });
+        execSync(argumentNpm ? `npm run ${actualScript}` : `yarn run ${actualScript}`, { cwd: tempDirectory, stdio: 'ignore' });
         // console.log(JSON.stringify(stdout))
         finalClean(useReject, tempDirectory, scriptIndex, argumentRun.length);
       } catch (error) {
