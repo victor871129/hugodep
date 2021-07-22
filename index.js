@@ -9,19 +9,20 @@ const nodePath = require('path');
 const nodeOs = require('os');
 const promiseLimit = require('p-limit');
 const argumentVars = require('yargs') // https://github.com/yargs/yargs/issues/372#issuecomment-181960542
-  .option('run', {
-    alias: 'r',
-    type: 'string',
-  })
   .option('ignorefolder', {
     alias: 'i',
     type: 'string',
   })
-  .option('verbose', {
-    type: 'boolean',
-  })
   .option('use-npm', {
     alias: 'n',
+    type: 'boolean',
+  })
+  .option('run', {
+    alias: 'r',
+    type: 'string',
+  })
+  .option('verbose', {
+    alias: 'v',
     type: 'boolean',
   })
   .argv;
