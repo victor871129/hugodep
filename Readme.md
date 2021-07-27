@@ -7,17 +7,19 @@ Without need of plugins, this tool supports every language and every syntax you 
 
 ## Usage
 
-If you want faster results use an SSD and deactivate any file monitor. Its preferred to be run overnight. 
-
-Take into account what package.json scripts you pass to run, because if you forget to pass any critical script you are going to get inaccurate results.
+This tool requires *node.js*. If you want faster results use an SSD and deactivate any file monitor. Its preferred to be run overnight. 
 
 Set `--use-npm` argument for utilizing *npm* instead of the faster *yarn*.
+
+
+Take into account what package.json scripts you pass to run, because if you forget to pass any critical script you are going to get inaccurate results.
 
 This example uses [npx](https://nodejs.dev/learn/the-npx-nodejs-package-runner) and analyzes the dependencies running only the script **build** and only the script **test**:
 
 ```
 npx hugodep --run build --run test
 ```
+
 ## Package.json scripts
 
 The package.json scripts should have a finish, i.e., scripts should not be on watch mode. For example, with [create-react-app](https://create-react-app.dev/docs/running-tests/#command-line-interface) modify the **test** script as:
