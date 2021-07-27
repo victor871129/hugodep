@@ -8,6 +8,7 @@ const fileSystem = require('fs-extra');
 const nodePath = require('path');
 const nodeOs = require('os');
 const promiseLimit = require('p-limit');
+const packageJson = require('./package.json');
 const argumentVars = require('yargs') // https://github.com/yargs/yargs/issues/372#issuecomment-181960542
   .option('ignorefolder', {
     alias: 'i',
@@ -154,6 +155,8 @@ const main = () => {
   console.log(filterFiles('node_modules')); // TODO jest
   console.log(filterFiles('dd'));
   */
+
+  console.log(`Version: ${packageJson.version}`);
 
   if (argumentVars.run == null) return console.error('Pass --run parameters, please.');
 
