@@ -10,7 +10,7 @@ const nodeOs = require('os');
 const promiseLimit = require('p-limit');
 const packageJson = require('./package.json');
 const argumentVars = require('yargs') // https://github.com/yargs/yargs/issues/372#issuecomment-181960542
-  .option('ignorefolder', {
+  .option('ignore-folder', {
     alias: 'i',
     type: 'string',
   })
@@ -26,6 +26,7 @@ const argumentVars = require('yargs') // https://github.com/yargs/yargs/issues/3
     alias: 'v',
     type: 'boolean',
   })
+  .strict()
   .argv;
 
 const failedTestCopy = false; // TODO TEST true
