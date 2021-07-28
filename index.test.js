@@ -1,4 +1,4 @@
-import main from '.';
+import main from './main';
 
 /* global it, expect */
 it('Smoke test main', () => {
