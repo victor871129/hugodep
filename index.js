@@ -8,7 +8,6 @@ const fileSystem = require('fs-extra');
 const nodePath = require('path');
 const nodeOs = require('os');
 const promiseLimit = require('p-limit');
-const packageJson = require('./package.json');
 const argumentVars = require('yargs') // https://github.com/yargs/yargs/issues/372#issuecomment-181960542
   .option('ignore-folder', {
     alias: 'i',
@@ -28,6 +27,7 @@ const argumentVars = require('yargs') // https://github.com/yargs/yargs/issues/3
   })
   .strict()
   .argv;
+const packageJson = require('./package.json');
 
 const failedTestCopy = false; // TODO TEST true
 const isLowEndMachine = false; // TODO TEST
@@ -40,9 +40,10 @@ let progressTotal = 0;
 const concurrentLimit = promiseLimit(isLowEndMachine ? 1 : 4);
 
 // TODO
-// - test without npm
+// - yarn bug
+// - test without npm installed
+// - test without node installed
 // - breaking tests
-// - test without node
 // - test posix multiplatform
 // - test check delete directory on finish
 // - does it work with git submodules?
@@ -192,3 +193,5 @@ const main = () => {
 };
 
 main();
+
+export default main;
