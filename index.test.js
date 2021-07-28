@@ -1,7 +1,7 @@
-import main from './main';
+const mainApp = require('./main');
 
 /* global it, expect */
 it('Smoke test main', () => {
-  main();
-  expect(3).toBe(3);
+  mainApp.main();
+  expect(3).toBe(3); // TODO
 });

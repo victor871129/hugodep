@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /* eslint-disable no-console */
 /* eslint-disable no-mixed-operators */
 /* eslint-disable no-plusplus */
@@ -192,6 +190,4 @@ const main = () => {
     .catch((error) => console.error(error)); // TODO check
 };
 
-main();
-
-export default main;
+exports.main = main;
