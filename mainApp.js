@@ -68,7 +68,7 @@ const allClean = (useReject, tempDirectory) => {
   fileSystem.remove(tempDirectory, (err) => {
     if (err) return useReject(err);
 
-    return console.log(`${Math.round((progressBar++) * 100 / progressTotal)}%`, argumentVerb ? 'cleaned!' : '');
+    return console.log(`${Math.round((progressBar++) * 100 / progressTotal)}%`, argumentVerb ? 'Cleaned' : '');
   });
 };
 
@@ -85,12 +85,13 @@ const finalClean = (useReject, tempDirectory, actualIndex, maxLength) => {
 };
 
 const runScript = (useReject, tempDirectory, currentLibraryVersion, callbackMethod) => {
+  // http://www.tiernok.com/posts/2019/faster-npm-installs-during-ci/#warning-npm-ci-performance
   exec(argumentNpm ? 'npm install --prefer-offline --no-audit' : 'yarn install', { cwd: tempDirectory }, (err) => {
     if (err) return logClean(useReject, err, tempDirectory);
 
     let hasError = false;
     argumentRun.forEach((actualScript, scriptIndex) => {
-      console.log(`${Math.round((progressBar++) * 100 / progressTotal)}%`, argumentVerb ? `npm run ${actualScript}` : '');
+      console.log(`${Math.round((progressBar++) * 100 / progressTotal)}%`, argumentVerb ? `Script run: ${actualScript}` : '');
       if (hasError) return;
 
       try {
