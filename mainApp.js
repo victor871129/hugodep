@@ -150,14 +150,8 @@ const isolatedRun = ({ dependencyName: currentLibrary, currentVersion, isDevelop
   });
 });
 
-const main = () => {
-  /*
-  console.log(filterFiles('node_modules')); // TODO jest
-  console.log(filterFiles('dd'));
-  */
-
+const firstApp = () => {
   console.log(`Version: ${packageJson.version}`);
-
   if (argumentVars.run == null) return console.error('Pass --run parameters, please.');
 
   const rawData = fileSystem.readFileSync(nodePath.join(process.cwd(), 'package.json'));
@@ -190,4 +184,5 @@ const main = () => {
     .catch((error) => console.error(error)); // TODO check
 };
 
-exports.main = main;
+exports.firstApp = firstApp;
+exports.filterFiles = filterFiles;

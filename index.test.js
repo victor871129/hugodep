@@ -1,7 +1,12 @@
-const mainApp = require('./main');
-
 /* global it, expect */
-it('Smoke test main', () => {
-  mainApp.main();
-  expect(3).toBe(3); // TODO
+const mainApp = require('./mainApp');
+
+it('Ignored folder', () => {
+  const expectedValue = mainApp.filterFiles('node_modules');
+  expect(expectedValue).toStrictEqual(false);
+});
+
+it('Not ignored folder', () => {
+  const expectedValue = mainApp.filterFiles('dd');
+  expect(expectedValue).toStrictEqual(true);
 });

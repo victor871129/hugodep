@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-const mainApp = require('./main');
+const mainApp = require('./mainApp');
 
-mainApp.main();
+mainApp.firstApp();
