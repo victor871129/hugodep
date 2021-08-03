@@ -175,7 +175,6 @@ const firstApp = () => {
     .then(async (hasError) => {
       if (hasError) return console.error('Your project must isolatedly run the package.json scripts.');
 
-      // TODO version not working: Version: ${process.env.npm_package_version}
       console.log(`${Math.round((progressBar++) * 100 / progressTotal)}%`);
       // TODO message: Ignored these root folders: node_modules, build. Dependencies not analyzed with these package.json scripts: start, eject
 
