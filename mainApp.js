@@ -90,6 +90,7 @@ const runScript = (useReject, tempDirectory, currentLibraryVersion, callbackMeth
     if (err) return logClean(useReject, err, tempDirectory);
 
     let hasError = false;
+    let errorScript = '';
     argumentRun.forEach((actualScript, scriptIndex) => {
       console.log(`${Math.round((progressBar++) * 100 / progressTotal)}%`, argumentVerb ? `Script run: ${actualScript}` : '');
       if (hasError) return;
@@ -100,12 +101,13 @@ const runScript = (useReject, tempDirectory, currentLibraryVersion, callbackMeth
         finalClean(useReject, tempDirectory, scriptIndex, argumentRun.length);
       } catch (error) {
         hasError = true;
-        // console.log(error)
+        errorScript = actualScript;
+        //console.log(error)
         allClean(useReject, tempDirectory);
       }
     });
 
-    return callbackMethod(hasError, currentLibraryVersion);
+    return callbackMethod(hasError, currentLibraryVersion, errorScript);
   });
 };
 
@@ -145,8 +147,8 @@ const isolatedRun = ({ dependencyName: currentLibrary, currentVersion, isDevelop
     return `${currentLibrary}@${currentVersion}`;
   };
 
-  createFolder(useReject, modifyFileMethod, (hasError, currentLibraryVersion) => {
-    console.log((hasError ? 'Dependency to ' : 'Unused dependency ') + currentLibraryVersion);
+  createFolder(useReject, modifyFileMethod, (hasError, libraryVersion) => {
+    console.log((hasError ? 'Dependency to ' : 'Unused dependency ') + libraryVersion);
     return useResolve();
   });
 });
@@ -170,10 +172,10 @@ const firstApp = () => {
 
   new Promise((useResolve, useReject) => {
     // First-isolated-run, without touching package.json, to check if project is running
-    createFolder(useReject, () => '', (hasError) => useResolve(hasError));
+    createFolder(useReject, () => '', (hasError, libraryVersion, errorScript) => useResolve({ hasError, errorScript }));
   })
-    .then(async (hasError) => {
-      if (hasError) return console.error('Your project must isolatedly run the package.json scripts.');
+    .then(({ hasError, errorScript }) => {
+      if (hasError) return console.error(`Error when running script '${errorScript}'. Your project must isolatedly run the package.json scripts.`);
 
       console.log(`${Math.round((progressBar++) * 100 / progressTotal)}%`);
       // TODO message: Ignored these root folders: node_modules, build. Dependencies not analyzed with these package.json scripts: start, eject
