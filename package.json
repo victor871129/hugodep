@@ -14,7 +14,7 @@
     "start": "node index.js --run build --run test",
     "test": "jest"
   },
-  "keywords": [],
+  "keywords": ["depcheck", "package.json", "module", "script", "check", "unused", "package", "packages", "depcheck", "dependency", "dependencies", "devDependencies"],
   "author": "",
   "license": "ISC",
   "dependencies": {
