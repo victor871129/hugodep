@@ -9,7 +9,7 @@ Without need of plugins, this tool supports every language and every syntax you 
 
 This tool requires *node.js*. If you want faster results use an SSD and deactivate any file monitor. Its preferred to be run overnight. 
 
-Set `--use-npm` argument for utilizing *npm* instead of the faster *yarn*.
+Set `--use-yarn` argument for utilizing the faster *yarn* instead of *npm*.
 
 
 Take into account what package.json scripts you pass to run, because if you forget to pass any critical script you are going to get inaccurate results.

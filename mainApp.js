@@ -11,7 +11,7 @@ const argumentVars = require('yargs') // https://github.com/yargs/yargs/issues/3
     alias: 'i',
     type: 'string',
   })
-  .option('use-npm', {
+  .option('use-yarn', {
     alias: 'n',
     type: 'boolean',
   })
@@ -32,7 +32,7 @@ const isLowEndMachine = false; // TODO TEST
 const argumentRun = Array.isArray(argumentVars.run) ? argumentVars.run : (argumentVars.run != null ? [argumentVars.run] : null);
 const argumentFolder = Array.isArray(argumentVars.ignorefolder) ? argumentVars.ignorefolder : (argumentVars.ignorefolder != null ? [argumentVars.ignorefolder] : null);
 const argumentVerb = argumentVars.verbose != null;
-const argumentNpm = argumentVars['use-npm'] != null;
+const argumentNpm = argumentVars['use-yarn'] == null;
 let progressBar = 1;
 let progressTotal = 0;
 const concurrentLimit = promiseLimit(isLowEndMachine ? 1 : 4);
