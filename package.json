@@ -1,6 +1,6 @@
 {
   "name": "hugodep",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "",
   "main": "index.js",
   "bin": {
@@ -14,7 +14,20 @@
     "start": "node index.js --run build --run test",
     "test": "jest"
   },
-  "keywords": ["depcheck", "package.json", "module", "script", "check", "unused", "package", "packages", "depcheck", "dependency", "dependencies", "devDependencies"],
+  "keywords": [
+    "depcheck",
+    "package.json",
+    "module",
+    "script",
+    "check",
+    "unused",
+    "package",
+    "packages",
+    "depcheck",
+    "dependency",
+    "dependencies",
+    "devDependencies"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
