@@ -9,12 +9,12 @@ Without need of plugins, this tool supports every language and every syntax you 
 
 This tool requires *node.js*. If you want faster results use an SSD and deactivate any file monitor. Its preferred to be run overnight. 
 
-Set `--use-yarn` argument for utilizing the faster *yarn* instead of *npm*.
+Set `--use-yarn` argument for utilizing the faster *yarn*. Omit that argument for utilizing *npm*.
 
 
 Take into account what package.json scripts you pass to run, because if you forget to pass any critical script you are going to get inaccurate results.
 
-This example uses [npx](https://nodejs.dev/learn/the-npx-nodejs-package-runner) and analyzes the dependencies running only the script **build** and only the script **test**:
+This example analyzes the dependencies running only the script **build** and only the script **test**, with [npx](https://nodejs.dev/learn/the-npx-nodejs-package-runner):
 
 ```
 npx hugodep --run build --run test

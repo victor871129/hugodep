@@ -12,7 +12,7 @@ const argumentVars = require('yargs') // https://github.com/yargs/yargs/issues/3
     type: 'string',
   })
   .option('use-yarn', {
-    alias: 'n',
+    alias: 'y',
     type: 'boolean',
   })
   .option('run', {
@@ -27,6 +27,10 @@ const argumentVars = require('yargs') // https://github.com/yargs/yargs/issues/3
   .argv;
 const packageJson = require('./package.json');
 
+// TODO TEST
+// - manual test posix
+// - manual test yarn
+// - manual test npm
 const failedTestCopy = false; // TODO TEST true
 const isLowEndMachine = false; // TODO TEST
 const argumentRun = Array.isArray(argumentVars.run) ? argumentVars.run : (argumentVars.run != null ? [argumentVars.run] : null);
@@ -38,25 +42,23 @@ let progressTotal = 0;
 const concurrentLimit = promiseLimit(isLowEndMachine ? 1 : 4);
 
 // TODO
-// - yarn bug
 // - test without npm installed
 // - test without node installed
 // - breaking tests
-// - test posix multiplatform
-// - test check delete directory on finish
 // - does it work with git submodules?
 // - readFileSync catch, writeFileSync catch
 // - npm ci: check package.json or npm-shrinkwrap.json
 // - np --no-2fa
 
 const filterFiles = (sourceFile) => {
-  let ignoredRootFolders = ['node_modules', 'build'];
+  let ignoreRootPaths = ['build'];
   if (argumentFolder != null) {
-    ignoredRootFolders = argumentFolder;
+    ignoreRootPaths = argumentFolder;
   }
 
-  return !ignoredRootFolders.some((actualFolder) => {
-    if (sourceFile.replace(process.cwd(), '') === actualFolder) {
+  const dismissRootPaths = [...ignoreRootPaths, 'node_modules', 'package-lock.json', 'yarn.lock']
+  return !dismissRootPaths.some((actualPath) => {
+    if (sourceFile.replace(process.cwd(), '') === actualPath) {
       return true;
     }
 
@@ -175,7 +177,7 @@ const firstApp = () => {
     createFolder(useReject, () => '', (hasError, libraryVersion, errorScript) => useResolve({ hasError, errorScript }));
   })
     .then(({ hasError, errorScript }) => {
-      if (hasError) return console.error(`Error when running script '${errorScript}'. Your project must isolatedly run the package.json scripts.`);
+      if (hasError) return console.error(`Error when running script '${errorScript}'. Your project must isolatedly run that script.`);
 
       console.log(`${Math.round((progressBar++) * 100 / progressTotal)}%`);
       // TODO message: Ignored these root folders: node_modules, build. Dependencies not analyzed with these package.json scripts: start, eject

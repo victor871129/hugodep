@@ -6,7 +6,7 @@ it('Ignored folder', () => {
   expect(expectedValue).toStrictEqual(false);
 });
 
-it('Not ignored folder', () => {
-  const expectedValue = mainApp.filterFiles('dd');
+it('Not ignored file', () => {
+  const expectedValue = mainApp.filterFiles('dd.json');
   expect(expectedValue).toStrictEqual(true);
 });
