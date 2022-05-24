@@ -20,7 +20,7 @@ const argumentVars = require('yargs') // https://github.com/yargs/yargs/issues/3
     type: 'string',
   })
   .option('verbose', {
-    alias: 'v',
+    alias: 'b',
     type: 'boolean',
   })
   .strict()
