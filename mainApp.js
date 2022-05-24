@@ -41,7 +41,7 @@ const argumentVerb = argumentVars.verbose != null;
 const argumentNpm = argumentVars['use-yarn'] == null;
 let progressBar = 1;
 let progressTotal = 0;
-const concurrentLimit = promiseLimit(isLowEndMachine ? 1 : 4);
+const concurrentLimit = promiseLimit(isLowEndMachine ? 1 : 6);
 
 // TODO
 // - test without npm installed
