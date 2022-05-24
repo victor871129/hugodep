@@ -44,7 +44,6 @@ let progressTotal = 0;
 const concurrentLimit = promiseLimit(isLowEndMachine ? 1 : 4);
 
 // TODO
-// Initial 0%, 1% and 2%
 // - test without npm installed
 // - test without node installed
 // - breaking tests
@@ -163,6 +162,7 @@ const firstApp = () => {
 
   const rawData = fileSystem.readFileSync(nodePath.join(process.cwd(), 'package.json'));
   const parsedData = JSON.parse(rawData);
+  console.log(`0%`);
   const dependencyKeys = parsedData.dependencies != null ? Object.keys(parsedData.dependencies) : [];
   const developmentKeys = parsedData.devDependencies != null ? Object.keys(parsedData.devDependencies) : [];
   const useDependencies = dependencyKeys.map((dependencyName) => ({ dependencyName, currentVersion: parsedData.dependencies[dependencyName], isDevelopment: false }));
@@ -173,6 +173,7 @@ const firstApp = () => {
 
   progressTotal = (argumentRun.length + 1 + 1) // +1 because copyFiles log, +1 because runScript log
     * (allDependencies.length + 1) + 1; // +1 because First-isolated-run log
+  console.log(`1%`);
 
   new Promise((useResolve, useReject) => {
     // First-isolated-run, without touching package.json, to check if project is running
