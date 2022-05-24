@@ -42,6 +42,7 @@ let progressTotal = 0;
 const concurrentLimit = promiseLimit(isLowEndMachine ? 1 : 4);
 
 // TODO
+// Initial 0%, 1% and 2%
 // - test without npm installed
 // - test without node installed
 // - breaking tests
