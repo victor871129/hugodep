@@ -163,8 +163,8 @@ const firstApp = () => {
   const rawData = fileSystem.readFileSync(nodePath.join(process.cwd(), 'package.json'));
   const parsedData = JSON.parse(rawData);
   const scriptNames = Object.getOwnPropertyNames(parsedData.scripts)
-  if(argumentRun.some(runArgument => !scriptNames.includes(runArgument))){
-    return console.error('A name in --run parameters is not found in the scripts.');
+  if(argumentRun.some(runArgument => !(/^[\w-.]+$/.test(runArgument)) || !scriptNames.includes(runArgument))){
+    return console.error('A name in --run parameters is not found in the scripts or invalid.');
   }
   console.log(`0%`);
   
