@@ -16,7 +16,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject",
-    "debug-hugodep": "node ../index.js --run build --run test --use-yarn -b"
+    "debug-hugodep": "node ../index.js --run build --run test --run eject --use-yarn -b"
   },
   "eslintConfig": {
     "extends": [
