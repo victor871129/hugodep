@@ -89,7 +89,7 @@ const finalClean = (useReject, tempDirectory, actualIndex, maxLength) => {
 
 const runScript = (useReject, tempDirectory, currentLibraryVersion, callbackMethod) => {
   // http://www.tiernok.com/posts/2019/faster-npm-installs-during-ci/#warning-npm-ci-performance
-  exec(argumentNpm ? 'npm install --prefer-offline --no-audit' : 'yarn install', { cwd: tempDirectory }, (err) => {
+  exec(argumentNpm ? 'npm install --prefer-offline --no-audit' : 'yarn install', { cwd: tempDirectory, timeout: 1000000 }, (err) => {
     if (err) return logClean(useReject, err, tempDirectory);
 
     let hasError = false;
@@ -99,7 +99,7 @@ const runScript = (useReject, tempDirectory, currentLibraryVersion, callbackMeth
       if (hasError) return;
 
       try {
-        execSync(argumentNpm ? `npm run ${actualScript}` : `yarn run ${actualScript}`, { cwd: tempDirectory, stdio: 'ignore' });
+        execSync(argumentNpm ? `npm run ${actualScript}` : `yarn run ${actualScript}`, { cwd: tempDirectory, timeout: 1000000, stdio: 'ignore' });
         // console.log(JSON.stringify(stdout))
         finalClean(useReject, tempDirectory, scriptIndex, argumentRun.length);
       } catch (error) {
