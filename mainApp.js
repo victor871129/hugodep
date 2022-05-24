@@ -157,7 +157,7 @@ const isolatedRun = ({ dependencyName: currentLibrary, currentVersion, isDevelop
 
 const firstApp = () => {
   console.log(`Version: ${packageJson.version}`);
-  if (argumentVars.run == null) return console.error('Pass --run parameters, please.');
+  if (argumentVars.run == null) return console.error('Pass --run parameters, check the Readme.');
 
   const rawData = fileSystem.readFileSync(nodePath.join(process.cwd(), 'package.json'));
   const parsedData = JSON.parse(rawData);
@@ -177,7 +177,7 @@ const firstApp = () => {
     createFolder(useReject, () => '', (hasError, libraryVersion, errorScript) => useResolve({ hasError, errorScript }));
   })
     .then(({ hasError, errorScript }) => {
-      if (hasError) return console.error(`Error when running script '${errorScript}'. Your project must isolatedly run that script.`);
+      if (hasError) return console.error(`Error when running script '${errorScript}'. Your project must run isolatedly.`);
 
       console.log(`${Math.round((progressBar++) * 100 / progressTotal)}%`);
       // TODO message: Ignored these root folders: node_modules, build. Dependencies not analyzed with these package.json scripts: start, eject
