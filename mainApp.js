@@ -185,7 +185,7 @@ const firstApp = () => {
     createFolder(useReject, () => '', (hasError, _, errorScript) => useResolve({ hasError, errorScript }));
   })
     .then(({ hasError, errorScript }) => {
-      if (hasError) return console.error(`Error when running script '${errorScript}'. Your project must run isolatedly.`);
+      if (hasError) return console.error(`Error when running script '${errorScript}'. Your project scripts must run isolatedly and without timeout.`);
 
       console.log(`${Math.round((progressBar++) * 100 / progressTotal)}%`);
       // TODO message: Ignored these root folders: node_modules, build. Dependencies not analyzed with these package.json scripts: start, eject
