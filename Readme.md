@@ -7,16 +7,16 @@ Without need of plugins, this tool supports every language and every syntax you 
 
 ## Usage
 
-Pass all the package.json scripts that test and build your code. The package.json scripts should have a finish, i.e., omit scripts or modify scripts that are always running or in watch mode. 
+Pass all the package.json scripts that test and build your code. The package.json scripts should have a finish, i.e., omit scripts or modify scripts that are always serving or in watch-mode. 
 
-For example, with [create-react-app](https://create-react-app.dev/docs/running-tests/#command-line-interface) modify the **test** script as:
+For example and tutorial, with [create-react-app](https://create-react-app.dev/docs/running-tests/#command-line-interface) modify the **test** script as:
 ```
 "scripts": {
     "test": "react-scripts test --watchAll=false",
     ...
 }
 ```
-Then calling [npx](https://nodejs.dev/learn/the-npx-nodejs-package-runner), analyze the dependencies running the **build** and **test** scripts, omitting **start** and **eject** scripts:
+Then calling [npx](https://nodejs.dev/learn/the-npx-nodejs-package-runner), analyze the dependencies running the **build** and **test** scripts, omitting **start** script because is a server, and omitting **eject** script because is a redundant build:
 
 ```
 npx hugodep --run build --run test

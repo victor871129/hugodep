@@ -162,7 +162,12 @@ const firstApp = () => {
 
   const rawData = fileSystem.readFileSync(nodePath.join(process.cwd(), 'package.json'));
   const parsedData = JSON.parse(rawData);
+  const scriptNames = Object.getOwnPropertyNames(parsedData.scripts)
+  if(argumentRun.some(runArgument => !scriptNames.includes(runArgument))){
+    return console.error('A name in --run parameters is not found in the scripts.');
+  }
   console.log(`0%`);
+  
   const dependencyKeys = parsedData.dependencies != null ? Object.keys(parsedData.dependencies) : [];
   const developmentKeys = parsedData.devDependencies != null ? Object.keys(parsedData.devDependencies) : [];
   const useDependencies = dependencyKeys.map((dependencyName) => ({ dependencyName, currentVersion: parsedData.dependencies[dependencyName], isDevelopment: false }));
