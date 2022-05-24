@@ -28,6 +28,8 @@ const argumentVars = require('yargs') // https://github.com/yargs/yargs/issues/3
 const packageJson = require('./package.json');
 
 // TODO TEST
+// - breakpoints debugging: use the `my-app` CRA and look for `debug-hugodep`
+// - deploy: np --no-2fa
 // - manual test posix
 // - manual test yarn
 // - manual test npm
@@ -49,7 +51,6 @@ const concurrentLimit = promiseLimit(isLowEndMachine ? 1 : 4);
 // - does it work with git submodules?
 // - readFileSync catch, writeFileSync catch
 // - npm ci: check package.json or npm-shrinkwrap.json
-// - np --no-2fa
 
 const filterFiles = (sourceFile) => {
   let ignoreRootPaths = ['build'];
@@ -175,7 +176,7 @@ const firstApp = () => {
 
   new Promise((useResolve, useReject) => {
     // First-isolated-run, without touching package.json, to check if project is running
-    createFolder(useReject, () => '', (hasError, libraryVersion, errorScript) => useResolve({ hasError, errorScript }));
+    createFolder(useReject, () => '', (hasError, _, errorScript) => useResolve({ hasError, errorScript }));
   })
     .then(({ hasError, errorScript }) => {
       if (hasError) return console.error(`Error when running script '${errorScript}'. Your project must run isolatedly.`);

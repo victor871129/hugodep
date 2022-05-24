@@ -7,25 +7,20 @@ Without need of plugins, this tool supports every language and every syntax you 
 
 ## Usage
 
-This tool requires *node.js*. If you want faster results use an SSD and deactivate any file monitor. Its preferred to be run overnight. 
+Pass all the package.json scripts that test and build your code. The package.json scripts should have a finish, i.e., omit scripts or modify scripts that are always running or in watch mode. 
 
-Set `--use-yarn` argument for utilizing the faster *yarn*. Omit that argument for utilizing *npm*.
-
-
-Take into account what package.json scripts you pass to run, because if you forget to pass any critical script you are going to get inaccurate results.
-
-This example analyzes the dependencies running only the script **build** and only the script **test**, with [npx](https://nodejs.dev/learn/the-npx-nodejs-package-runner):
-
-```
-npx hugodep --run build --run test
-```
-
-## Package.json scripts
-
-The package.json scripts should have a finish, i.e., scripts should not be on watch mode. For example, with [create-react-app](https://create-react-app.dev/docs/running-tests/#command-line-interface) modify the **test** script as:
+For example, with [create-react-app](https://create-react-app.dev/docs/running-tests/#command-line-interface) modify the **test** script as:
 ```
 "scripts": {
     "test": "react-scripts test --watchAll=false",
     ...
 }
 ```
+Then calling [npx](https://nodejs.dev/learn/the-npx-nodejs-package-runner), analyze the dependencies running the **build** and **test** scripts, omitting **start** and **eject** scripts:
+
+```
+npx hugodep --run build --run test
+```
+This tool requires *node.js*. If you want faster results use an SSD. 
+
+Set `--use-yarn` argument for using the faster **yarn**. Omitting that argument uses **npm**.
